@@ -19,11 +19,13 @@
             min-height: 100vh;
         }
         .container {
-            width: 66%; /* Container width 66% of the screen */
-            padding: 40px; /* Increase padding for better aesthetics */
+            width: 90%; /* Make the container width flexible */
+            max-width: 800px; /* Set a maximum width */
+            padding: 20px;
             border-radius: 10px;
             background-color: #2E2E2E; /* Dark grey background for the container */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+            margin: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -41,34 +43,41 @@
             height: auto;
         }
         h1 {
-            font-size: 9rem; /* Larger font size for "Who's There?" */
+            font-size: 3rem; /* Adjusted font size for responsiveness */
             font-weight: 800; /* Set to bold */
             margin: 0;
             line-height: 1.1; /* Adjust line height to reduce gap */
             color: #fdfbfb; /* Set color to #fdfbfb */
         }
         p {
-            font-size: 2rem; /* Slightly larger font size for the paragraph */
+            font-size: 1.2rem; /* Adjusted font size for the paragraph */
             margin: 20px 0;
             color: #fdfbfb; /* Set color to #fdfbfb */
         }
         .search-bar {
             margin: 20px 0;
+            width: 100%; /* Make search bar take full width */
+            display: flex;
+            justify-content: center;
         }
         .search-bar input {
-            padding: 15px;
-            font-size: 1.2rem;
+            padding: 10px;
+            font-size: 1rem;
             border-radius: 5px;
             border: 1px solid #ccc; /* Light border for the input */
+            width: calc(100% - 130px); /* Make input take remaining width */
+            max-width: 400px;
+            display: inline-block;
         }
         .search-bar button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 10px 20px;
+            font-size: 1rem;
             border-radius: 5px;
             border: none;
             background-color: #ffc107;
             color: #333;
             cursor: pointer;
+            display: inline-block;
         }
         .register-link {
             margin-top: 10px;
@@ -79,11 +88,9 @@
             text-decoration: none;
         }
         .results-container {
-            width: 66%;
+            width: 90%; /* Adjust container width for responsiveness */
+            max-width: 800px;
             margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         .results {
             display: flex;
@@ -96,7 +103,8 @@
             padding: 10px;
             border-radius: 5px;
             text-align: left;
-            width: calc(33% - 10px); /* Adjust width as needed */
+            width: calc(100% - 20px); /* Full width on mobile */
+            max-width: 250px; /* Maximum width for larger screens */
             box-sizing: border-box;
         }
         .result-item * {
@@ -153,6 +161,18 @@
             cursor: pointer;
             margin-top: 10px;
         }
+
+        /* Media Queries for Responsive Design */
+        @media (min-width: 600px) {
+            .result-item {
+                width: calc(50% - 20px); /* Two items per row on medium screens */
+            }
+        }
+        @media (min-width: 900px) {
+            .result-item {
+                width: calc(33.33% - 20px); /* Three items per row on large screens */
+            }
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TGNRSQ6QGB"></script>
@@ -164,15 +184,6 @@
         gtag('config', 'G-TGNRSQ6QGB');
     </script>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGNRSQ6QGB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TGNRSQ6QGB');
-</script>
 <body>
     <div class="logo">
         <img src="logo.png" alt="KnokKnok Logo" />
