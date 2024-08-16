@@ -5,22 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estate Directory</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TGNRSQ6QGB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-TGNRSQ6QGB');
-    </script>
-    
     <style>
         body {
-            background-color: #fdfbfb; /* White background */
-            color: #000; /* Black text color for better contrast */
-            font-family: 'Prompt', sans-serif; /* Using Prompt font */
+            background-color: #fdfbfb;
+            color: #000;
+            font-family: 'Prompt', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -29,140 +18,178 @@
             align-items: center;
             min-height: 100vh;
         }
+
         .container {
-            width: 90%; /* Make the container width flexible */
-            max-width: 800px; /* Set a maximum width */
-            padding: 20px;
+            width: 66%;
+            padding: 40px;
             border-radius: 10px;
-            background-color: #2E2E2E; /* Dark grey background for the container */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-            margin: 20px;
+            background-color: #2E2E2E;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1;
-            position: relative;
         }
+
         .logo {
             position: absolute;
             top: 20px;
             left: 20px;
         }
+
         .logo img {
-            width: 150px; /* Adjust width as needed */
+            width: 150px;
             height: auto;
         }
+
         h1 {
-            font-size: 3rem; /* Adjusted font size for responsiveness */
-            font-weight: 800; /* Set to bold */
+            font-size: 9rem;
+            font-weight: 800;
             margin: 0;
-            line-height: 1.1; /* Adjust line height to reduce gap */
-            color: #fdfbfb; /* Set color to #fdfbfb */
+            line-height: 1.1;
+            color: #fdfbfb;
         }
+
         p {
-            font-size: 1.2rem; /* Adjusted font size for the paragraph */
+            font-size: 2rem;
             margin: 20px 0;
-            color: #fdfbfb; /* Set color to #fdfbfb */
+            color: #fdfbfb;
         }
+
         .search-bar {
             margin: 20px 0;
-            width: 100%; /* Make search bar take full width */
-            display: flex;
-            justify-content: center;
         }
+
         .search-bar input {
-            padding: 10px;
-            font-size: 1rem;
+            padding: 15px;
+            font-size: 1.2rem;
             border-radius: 5px;
-            border: 1px solid #ccc; /* Light border for the input */
-            width: calc(100% - 130px); /* Make input take remaining width */
-            max-width: 400px;
-            display: inline-block;
+            border: 1px solid #ccc;
         }
+
         .search-bar button {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             border-radius: 5px;
             border: none;
             background-color: #ffc107;
             color: #333;
             cursor: pointer;
-            display: inline-block;
         }
+
         .register-link {
             margin-top: 10px;
         }
+
         .register-link a {
-            color: #fdfbfb; /* White text color */
-            font-size: 0.8rem; /* Small font size */
+            color: #fdfbfb;
+            font-size: 0.8rem;
             text-decoration: none;
         }
+
         .results-container {
-            width: 90%; /* Adjust container width for responsiveness */
-            max-width: 800px;
+            width: 66%;
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         .results {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
         }
+
         .result-item {
-            background-color: #e0e0e0; /* Light grey background for result items */
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
             text-align: left;
-            width: calc(100% - 20px); /* Full width on mobile */
-            max-width: 250px; /* Maximum width for larger screens */
+            width: 300px;
+            min-height: 500px;
             box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
         }
-        .result-item * {
-            color: #000 !important; /* Ensure text color is black */
+
+        .result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
+
         .result-item img {
-            width: 80px; /* Reduce size of the profile photo */
-            height: 80px; /* Reduce size of the profile photo */
-            border-radius: 50%;
+            width: 100%;
+            height: 50%;
+            border-radius: 10px;
             object-fit: cover;
-            margin-bottom: 10px; /* Add some spacing below the image */
+            margin-bottom: 10px;
         }
+
         .result-item p {
-            font-size: 0.8rem; /* Reduce font size */
+            font-size: 1rem;
             margin: 5px 0;
+            color: #000;
         }
+
         .result-item p strong {
-            font-size: 0.9rem; /* Slightly larger for strong text */
+            font-size: 1rem;
         }
+
+        .about-me {
+            display: -webkit-box;
+            -webkit-line-clamp: 5; /* Limit to 5 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Add ellipsis (...) */
+            height: 7.5rem; /* Adjust to fit 5 lines */
+            white-space: normal; /* Ensure the text wraps properly */
+        }
+
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 100; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 100;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
         }
+
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
+            margin: 10% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            max-width: 250px; /* Maximum width */
-            height: auto; /* Automatic height */
-            text-align: center; /* Centered text */
+            width: 80%;
+            max-width: 600px;
+            height: 80%; /* Uniform height for all */
+            text-align: center;
             border-radius: 10px;
-            color: #000 !important; /* Ensure text color is black */
-            font-size: 0.8rem; /* Set font size to smaller */
+            color: #000;
+            overflow-y: auto;
         }
+
+        .modal-content img {
+            width: 100%;
+            height: 350px; /* Increased height for larger images */
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
         .modal-content p {
-            color: #000 !important; /* Ensure text color is black */
-            font-size: 0.8rem; /* Set font size to smaller */
+            margin: 10px 0;
+            color: #000; /* Ensure text color is black */
+            font-size: 0.9rem; /* Slightly smaller text */
+            line-height: 1.4; /* Improved line spacing */
         }
+
         .close-btn {
             background-color: #4CAF50;
             color: white;
@@ -173,16 +200,11 @@
             margin-top: 10px;
         }
 
-        /* Media Queries for Responsive Design */
-        @media (min-width: 600px) {
-            .result-item {
-                width: calc(50% - 20px); /* Two items per row on medium screens */
-            }
-        }
-        @media (min-width: 900px) {
-            .result-item {
-                width: calc(33.33% - 20px); /* Three items per row on large screens */
-            }
+        .agent-details {
+            font-size: 0.9rem; /* Adjusted font size */
+            transition: font-size 0.3s ease;
+            max-height: 200px;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -206,6 +228,20 @@
     </div>
 
     <!-- The Modal -->
+    <div id="agentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">Close</span>
+            <img id="modalImg" src="" alt="Agent Image">
+            <div id="agentDetails" class="agent-details">
+                <p id="modalName"></p>
+                <p id="modalAgency"></p>
+                <p id="modalEmail"></p>
+                <p id="modalAboutMe"></p>
+                <p id="modalSweetSpot"></p>
+            </div>
+        </div>
+    </div>
+
     <div id="noResultsModal" class="modal">
         <div class="modal-content">
             <p>Unfortunately, there are no agents registered in your area (please make sure you have typed a location and not a postcode).</p>
@@ -221,15 +257,15 @@
                 .then(data => {
                     const resultsDiv = document.getElementById('results');
                     if (data.length === 0) {
-                        openModal();
+                        openNoResultsModal();
                     } else {
                         resultsDiv.innerHTML = data.map(agent => `
-                            <div class="result-item">
+                            <div class="result-item" onclick="openAgentModal('${agent.photo}', '${agent.name}', '${agent.agency}', '${agent.email}', '${agent.aboutMe}', '${agent.sweetSpot}')">
                                 <img src="${agent.photo}" alt="${agent.name}">
                                 <p><strong>Name:</strong> ${agent.name}</p>
                                 <p><strong>Agency:</strong> ${agent.agency}</p>
                                 <p><strong>Email:</strong> ${agent.email}</p>
-                                <p><strong>About Me:</strong> ${agent.aboutMe}</p>
+                                <p class="about-me"><strong>About Me:</strong> ${agent.aboutMe}</p>
                                 <p><strong>Sweet Spot:</strong> ${agent.sweetSpot}</p>
                             </div>
                         `).join('');
@@ -237,11 +273,31 @@
                 });
         }
 
-        function openModal() {
-            document.getElementById('noResultsModal').style.display = 'block';
+        function openAgentModal(photo, name, agency, email, aboutMe, sweetSpot) {
+            document.getElementById('modalImg').src = photo;
+            document.getElementById('modalName').innerHTML = `<strong>Name:</strong> ${name}`;
+            document.getElementById('modalAgency').innerHTML = `<strong>Agency:</strong> ${agency}`;
+            document.getElementById('modalEmail').innerHTML = `<strong>Email:</strong> ${email}`;
+            document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe}`;
+            document.getElementById('modalSweetSpot').innerHTML = `<strong>Sweet Spot:</strong> ${sweetSpot}`;
+
+            const modalContent = document.querySelector('.modal-content');
+            const agentDetails = document.getElementById('agentDetails');
+
+            // Reset font size
+            agentDetails.style.fontSize = '0.9rem';
+
+            // Adjust font size if content overflows
+            while (modalContent.scrollHeight > modalContent.clientHeight) {
+                const currentFontSize = parseFloat(window.getComputedStyle(agentDetails).fontSize);
+                agentDetails.style.fontSize = `${currentFontSize - 0.1}rem`;
+            }
+
+            document.getElementById('agentModal').style.display = 'block';
         }
 
         function closeModal() {
+            document.getElementById('agentModal').style.display = 'none';
             document.getElementById('noResultsModal').style.display = 'none';
         }
     </script>
