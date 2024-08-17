@@ -206,6 +206,15 @@
             max-height: 200px;
             overflow-y: auto;
         }
+
+        /* Small "No Results" Modal Box */
+        #noResultsModal .modal-content {
+            max-width: 300px;
+            max-height: 150px;
+            text-align: center;
+            padding: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -227,7 +236,7 @@
         <div class="results" id="results"></div>
     </div>
 
-    <!-- The Modal -->
+    <!-- The Modal for Card Click -->
     <div id="agentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">Close</span>
@@ -242,6 +251,7 @@
         </div>
     </div>
 
+    <!-- Separate Modal for No Results -->
     <div id="noResultsModal" class="modal">
         <div class="modal-content">
             <p>Unfortunately, there are no agents registered in your area (please make sure you have typed a location and not a postcode).</p>
@@ -299,6 +309,10 @@
         function closeModal() {
             document.getElementById('agentModal').style.display = 'none';
             document.getElementById('noResultsModal').style.display = 'none';
+        }
+
+        function openNoResultsModal() {
+            document.getElementById('noResultsModal').style.display = 'block';
         }
     </script>
 </body>
