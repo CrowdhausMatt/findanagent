@@ -177,7 +177,7 @@
 
         .modal-content img {
             width: 100%;
-            height: 350px; /* Increased height for larger images */
+            height: 450px; /* Increased height for larger images */
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -191,8 +191,8 @@
         }
 
         .close-btn {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #FFC109;
+            color: rgb(11, 11, 11);
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -207,13 +207,22 @@
             overflow-y: auto;
         }
 
-        /* Small "No Results" Modal Box */
-        #noResultsModal .modal-content {
-            max-width: 300px;
-            max-height: 150px;
-            text-align: center;
-            padding: 20px;
-        }
+        #noResultsModal .no-results-modal-content p {
+    color: #000000 !important; /* Force black text */
+    font-size: 0.75rem !important;  /* Reduced font size by 25% */
+    line-height: 1.5 !important; /* Line spacing */
+}
+
+#noResultsModal .no-results-modal-content {
+    background-color: #ffffff; /* White background */
+    margin: 20% auto; /* Centered with more top margin */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Smaller width */
+    max-width: 400px; /* Adjust as needed */
+    text-align: center;
+    border-radius: 10px;
+}
 
     </style>
 </head>
@@ -229,14 +238,14 @@
             <button onclick="searchAgents()">Search</button>
         </div>
         <div class="register-link">
-            <a href="https://form.jotform.com/241126004564345" target="_blank">Are you an Agent? Register here</a>
+            <a href="https://airtable.com/appTke8M57IxqdO2N/pagqWWTIzMWlTi3JV/form" target="_blank">Are you an Agent? Register here</a>
         </div>
     </div>
     <div class="results-container">
         <div class="results" id="results"></div>
     </div>
 
-    <!-- The Modal for Card Click -->
+    <!-- The Agent Modal -->
     <div id="agentModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">Close</span>
@@ -251,9 +260,9 @@
         </div>
     </div>
 
-    <!-- Separate Modal for No Results -->
+    <!-- The No Results Modal -->
     <div id="noResultsModal" class="modal">
-        <div class="modal-content">
+        <div class="no-results-modal-content">
             <p>Unfortunately, there are no agents registered in your area (please make sure you have typed a location and not a postcode).</p>
             <button class="close-btn" onclick="closeModal()">OK</button>
         </div>
@@ -262,28 +271,39 @@
     <script>
         function searchAgents() {
             const location = document.getElementById('location').value;
-            fetch(`/search?location=${location}`)
+            console.log('Searching for location:', location); // Debugging
+            fetch(`/search?location=${encodeURIComponent(location)}`)
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Fetched data:', data); // Debugging
                     const resultsDiv = document.getElementById('results');
                     if (data.length === 0) {
                         openNoResultsModal();
                     } else {
-                        resultsDiv.innerHTML = data.map(agent => `
-                            <div class="result-item" onclick="openAgentModal('${agent.photo}', '${agent.name}', '${agent.agency}', '${agent.email}', '${agent.aboutMe}', '${agent.sweetSpot}')">
-                                <img src="${agent.photo}" alt="${agent.name}">
-                                <p><strong>Name:</strong> ${agent.name}</p>
-                                <p><strong>Agency:</strong> ${agent.agency}</p>
-                                <p><strong>Email:</strong> ${agent.email}</p>
-                                <p class="about-me"><strong>About Me:</strong> ${agent.aboutMe}</p>
-                                <p><strong>Sweet Spot:</strong> ${agent.sweetSpot}</p>
-                            </div>
-                        `).join('');
+                        resultsDiv.innerHTML = data.map(agent => {
+                            const name = agent.name ? agent.name.replace(/'/g, "\\'") : '';
+                            const agency = agent.agency ? agent.agency.replace(/'/g, "\\'") : '';
+                            const email = agent.email ? agent.email.replace(/'/g, "\\'") : '';
+                            const aboutMe = agent.aboutMe ? agent.aboutMe.replace(/'/g, "\\'") : '';
+                            const sweetSpot = agent.sweetSpot ? agent.sweetSpot.replace(/'/g, "\\'") : '';
+                            return `
+                                <div class="result-item" onclick="openAgentModal('${agent.photo}', '${name}', '${agency}', '${email}', '${aboutMe}', '${sweetSpot}')">
+                                    <img src="${agent.photo}" alt="${agent.name}">
+                                    <p><strong>Name:</strong> ${agent.name}</p>
+                                    <p><strong>Agency:</strong> ${agent.agency}</p>
+                                    <p><strong>Email:</strong> ${agent.email}</p>
+                                    <p class="about-me"><strong>About Me:</strong> ${agent.aboutMe}</p>
+                                    <p><strong>Sweet Spot:</strong> ${agent.sweetSpot}</p>
+                                </div>
+                            `;
+                        }).join('');
                     }
-                });
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
 
         function openAgentModal(photo, name, agency, email, aboutMe, sweetSpot) {
+            console.log(`Opening modal for: ${name}`); // Debugging
             document.getElementById('modalImg').src = photo;
             document.getElementById('modalName').innerHTML = `<strong>Name:</strong> ${name}`;
             document.getElementById('modalAgency').innerHTML = `<strong>Agency:</strong> ${agency}`;
@@ -306,13 +326,13 @@
             document.getElementById('agentModal').style.display = 'block';
         }
 
+        function openNoResultsModal() {
+            document.getElementById('noResultsModal').style.display = 'block';
+        }
+
         function closeModal() {
             document.getElementById('agentModal').style.display = 'none';
             document.getElementById('noResultsModal').style.display = 'none';
-        }
-
-        function openNoResultsModal() {
-            document.getElementById('noResultsModal').style.display = 'block';
         }
     </script>
 </body>
