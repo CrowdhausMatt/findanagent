@@ -6,9 +6,9 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const AIRTABLE_API_KEY = 'patcNXTJ3Jx6HM7qj.b3924090bac950474e28b50aae1044c11595cb50b1453c9e557b5bd4715a4dcf';
-const AIRTABLE_BASE_ID = 'appuFek7AntwUzA7z';
-const AIRTABLE_TABLE_NAME = 'Table 1'; // Adjust if different
+const AIRTABLE_API_KEY = 'patWX89mlIzZlvOdI'; // Your new Airtable API token
+const AIRTABLE_BASE_ID = 'appTke8M57IxqdO2N'; // Your new Airtable Base ID
+const AIRTABLE_TABLE_NAME = 'Estate Agent Directory'; // Adjust if different
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
