@@ -41,6 +41,12 @@ async function fetchAgents() {
     }
 }
 
+// Temporary route to test Airtable connection
+app.get('/test-airtable', async (req, res) => {
+    const agents = await fetchAgents();
+    res.json(agents); // This will return the fetched data in JSON format
+});
+
 // Endpoint to search for agents by location
 app.get('/search', async (req, res) => {
     console.log('Received search request');
