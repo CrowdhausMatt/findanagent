@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const AIRTABLE_API_KEY = 'patQN8cbYJKHrvtL1.0f833101180f478add1604618e56312c646ed268883ef9d9ddd48f3dfa5b1c32'; // Your new Airtable API token
-const AIRTABLE_BASE_ID = 'appTke8M57IxqdO2N'; // Your new Airtable Base ID
-const AIRTABLE_TABLE_NAME = 'Estate Agent Directory'; // Adjust if different
+const AIRTABLE_BASE_ID = 'appuFek7AntwUzA7z'; // Your new Airtable Base ID
+const AIRTABLE_TABLE_NAME = 'Agents details'; // Adjust if different
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
