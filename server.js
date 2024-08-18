@@ -6,9 +6,10 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const AIRTABLE_API_KEY = 'patDFL1U6quIJTHXB.561ec09512580b77d6e9a57c598bdba71ac5189d1cfa39573a51fef44259f51b'; // Your new Airtable API token
-const AIRTABLE_BASE_ID = 'appuFek7AntwUzA7z'; // Your new Airtable Base ID
-const AIRTABLE_TABLE_NAME = 'Agents details'; // Adjust if different
+// Airtable API details
+const AIRTABLE_API_KEY = 'patF7uCEI7j47Qqtf.332122288ed03286976835577885a662820d961becab61563c1b81632430bc13'; // Your Airtable API token
+const AIRTABLE_BASE_ID = 'appTke8M57IxqdO2N'; // Your Airtable Base ID
+const AIRTABLE_TABLE_NAME = 'Estate Agent Directory'; // Adjust if different
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,15 +25,14 @@ async function fetchAgents() {
         });
         console.log(response.data.records); // Log the fetched data records to see field names
         return response.data.records.map(record => {
-            console.log(record.fields); // Log the fields of each record to see the exact field names
             return {
                 name: record.fields.Name,
                 email: record.fields.Email,
+                agency: record.fields.Agency,
                 location: record.fields.Location,
                 photo: record.fields.Photo ? record.fields.Photo[0].url : '',
-                aboutMe: record.fields['About Me'], // Ensure this matches exactly with Airtable field name
-                sweetSpot: record.fields.SweetSpot,
-                agency: record.fields.Agency // Ensure this matches exactly with Airtable field name
+                aboutMe: record.fields['About Me'],
+                sweetSpot: record.fields.SweetSpot
             };
         });
     } catch (error) {
@@ -56,7 +56,6 @@ app.get('/search', async (req, res) => {
     res.json(results);
 });
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
