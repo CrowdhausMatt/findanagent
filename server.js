@@ -6,7 +6,7 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const AIRTABLE_API_KEY = 'patQN8cbYJKHrvtL1.0f833101180f478add1604618e56312c646ed268883ef9d9ddd48f3dfa5b1c32'; // Your new Airtable API token
+const AIRTABLE_API_KEY = 'patDFL1U6quIJTHXB.561ec09512580b77d6e9a57c598bdba71ac5189d1cfa39573a51fef44259f51b'; // Your new Airtable API token
 const AIRTABLE_BASE_ID = 'appuFek7AntwUzA7z'; // Your new Airtable Base ID
 const AIRTABLE_TABLE_NAME = 'Agents details'; // Adjust if different
 
