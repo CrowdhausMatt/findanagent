@@ -6,10 +6,10 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Airtable credentials
+// Airtable API details
 const AIRTABLE_API_KEY = 'patF7uCEI7j47Qqtf.332122288ed03286976835577885a662820d961becab61563c1b81632430bc13'; // Your Airtable API token
 const AIRTABLE_BASE_ID = 'appTke8M57IxqdO2N'; // Your Airtable Base ID
-const AIRTABLE_TABLE_NAME = 'Estate Agent Directory'; // Your Airtable Table Name
+const AIRTABLE_TABLE_NAME = 'Estate Agent Directory'; // Adjust if different
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,19 +25,18 @@ async function fetchAgents() {
         });
         console.log(response.data.records); // Log the fetched data records to see field names
         return response.data.records.map(record => {
-            console.log(record.fields); // Log the fields of each record to see the exact field names
             return {
                 name: record.fields.Name,
                 email: record.fields.Email,
+                agency: record.fields.Agency,
                 location: record.fields.Location,
                 photo: record.fields.Photo ? record.fields.Photo[0].url : '',
                 aboutMe: record.fields['About Me'],
-                sweetSpot: record.fields.SweetSpot,
-                agency: record.fields.Agency
+                sweetSpot: record.fields.SweetSpot
             };
         });
     } catch (error) {
-        console.error('Error fetching data from Airtable:', error.response ? error.response.data : error.message);
+        console.error('Error fetching data from Airtable:', error);
         return [];
     }
 }
@@ -57,13 +56,6 @@ app.get('/search', async (req, res) => {
     res.json(results);
 });
 
-// Temporary route to test Airtable API
-app.get('/test-airtable', async (req, res) => {
-    const agents = await fetchAgents();
-    res.json(agents);
-});
-
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
