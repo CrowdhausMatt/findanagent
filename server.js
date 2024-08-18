@@ -56,6 +56,7 @@ app.get('/search', async (req, res) => {
     res.json(results);
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
