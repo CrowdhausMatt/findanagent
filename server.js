@@ -7,9 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Airtable API details
-const AIRTABLE_API_KEY = 'patF7uCEI7j47Qqtf.332122288ed03286976835577885a662820d961becab61563c1b81632430bc13'; // Your Airtable API token
-const AIRTABLE_BASE_ID = 'appTke8M57IxqdO2N'; // Your Airtable Base ID
-const AIRTABLE_TABLE_NAME = 'Estate Agent Directory'; // Adjust if different
+const AIRTABLE_API_KEY = 'pat2pfzRQ5fc77EI4.e704c967e7f1639aa3fb8246a4a64e4de6416604563bf34c405708cc78919c30'; // Your Airtable API token
+const AIRTABLE_BASE_ID = 'appvOrOb4oyC1UUzP'; // Your Airtable Base ID
+const AIRTABLE_TABLE_NAME = 'Untitled Base'; // Adjust if different
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
