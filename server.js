@@ -6,8 +6,8 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const AIRTABLE_API_KEY = 'patcNXTJ3Jx6HM7qj.b3924090bac950474e28b50aae1044c11595cb50b1453c9e557b5bd4715a4dcf';
-const AIRTABLE_BASE_ID = 'appuFek7AntwUzA7z';
+const AIRTABLE_API_KEY = 'patKeCizXhNuzfMV9.17dfdd7073e389379b63a74412f1f83f5bcec2eba680c2fea213c0c6ff55d74f';
+const AIRTABLE_BASE_ID = 'appTke8M57IxqdO2N';
 const AIRTABLE_TABLE_NAME = 'Table 1'; // Adjust if different
 
 app.use(bodyParser.json());
