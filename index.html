@@ -190,6 +190,16 @@
             line-height: 1.4; /* Improved line spacing */
         }
 
+        .send-message-btn {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
         .close-btn {
             background-color: #FFC109;
             color: rgb(11, 11, 11);
@@ -208,21 +218,21 @@
         }
 
         #noResultsModal .no-results-modal-content p {
-    color: #000000 !important; /* Force black text */
-    font-size: 0.75rem !important;  /* Reduced font size by 25% */
-    line-height: 1.5 !important; /* Line spacing */
-}
+            color: #000000 !important; /* Force black text */
+            font-size: 0.75rem !important;  /* Reduced font size by 25% */
+            line-height: 1.5 !important; /* Line spacing */
+        }
 
-#noResultsModal .no-results-modal-content {
-    background-color: #ffffff; /* White background */
-    margin: 20% auto; /* Centered with more top margin */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%; /* Smaller width */
-    max-width: 400px; /* Adjust as needed */
-    text-align: center;
-    border-radius: 10px;
-}
+        #noResultsModal .no-results-modal-content {
+            background-color: #ffffff; /* White background */
+            margin: 20% auto; /* Centered with more top margin */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%; /* Smaller width */
+            max-width: 400px; /* Adjust as needed */
+            text-align: center;
+            border-radius: 10px;
+        }
 
     </style>
 </head>
@@ -257,6 +267,7 @@
                 <p id="modalAboutMe"></p>
                 <p id="modalSweetSpot"></p>
             </div>
+            <button class="send-message-btn" onclick="sendMessage()">Send a Message</button>
         </div>
     </div>
 
@@ -310,30 +321,24 @@
             document.getElementById('modalEmail').innerHTML = `<strong>Email:</strong> ${email}`;
             document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe}`;
             document.getElementById('modalSweetSpot').innerHTML = `<strong>Sweet Spot:</strong> ${sweetSpot}`;
-
-            const modalContent = document.querySelector('.modal-content');
-            const agentDetails = document.getElementById('agentDetails');
-
-            // Reset font size
-            agentDetails.style.fontSize = '0.9rem';
-
-            // Adjust font size if content overflows
-            while (modalContent.scrollHeight > modalContent.clientHeight) {
-                const currentFontSize = parseFloat(window.getComputedStyle(agentDetails).fontSize);
-                agentDetails.style.fontSize = `${currentFontSize - 0.1}rem`;
-            }
-
             document.getElementById('agentModal').style.display = 'block';
-        }
 
-        function openNoResultsModal() {
-            document.getElementById('noResultsModal').style.display = 'block';
+            // Store email for sending
+            document.getElementById('sendEmail').dataset.email = email;
         }
 
         function closeModal() {
             document.getElementById('agentModal').style.display = 'none';
             document.getElementById('noResultsModal').style.display = 'none';
         }
+
+        function sendMessage() {
+            const email = document.getElementById('modalEmail').textContent.split(' ')[1];
+            if (email) {
+                window.location.href = `mailto:${email}`;
+            }
+        }
+
     </script>
 </body>
 </html>
