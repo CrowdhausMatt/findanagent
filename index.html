@@ -317,7 +317,7 @@
                             const name = agent.name ? agent.name.replace(/'/g, "\\'") : '';
                             const agency = agent.agency ? agent.agency.replace(/'/g, "\\'") : '';
                             const email = agent.email ? agent.email.replace(/'/g, "\\'") : '';
-                            const aboutMe = agent.aboutMe ? agent.aboutMe.replace(/'/g, "\\'") : '';
+                            const aboutMe = agent.aboutMe ? agent.aboutMe.replace(/'/g, "\\'").replace(/\n/g, '<br>') : ''; // Handle line breaks
                             const sweetSpot = agent.sweetSpot ? agent.sweetSpot.replace(/'/g, "\\'") : '';
                             return `
                                 <div class="result-item" onclick="openAgentModal('${agent.photo}', '${name}', '${agency}', '${email}', '${aboutMe}', '${sweetSpot}')">
@@ -341,7 +341,7 @@
             document.getElementById('modalName').innerHTML = `<strong>Name:</strong> ${name}`;
             document.getElementById('modalAgency').innerHTML = `<strong>Agency:</strong> ${agency}`;
             document.getElementById('modalEmail').innerHTML = `<strong>Email:</strong> ${email}`;
-            document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe}`;
+            document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe.replace(/\n/g, '<br>')}`; // Handle line breaks
             document.getElementById('modalSweetSpot').innerHTML = `<strong>Sweet Spot:</strong> ${sweetSpot}`;
 
             document.getElementById('messageBtn').setAttribute('onclick', `sendMessage('${email}')`);
@@ -376,3 +376,4 @@
     </script>
 </body>
 </html>
+
