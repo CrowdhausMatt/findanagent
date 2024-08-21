@@ -5,16 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estate Directory</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;800&display=swap" rel="stylesheet">
-    
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TGNRSQ6QGB"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TGNRSQ6QGB');
-    </script>
-    
     <style>
         body {
             background-color: #fdfbfb;
@@ -113,15 +103,16 @@
         }
 
         .result-item {
-            background-color: #e0e0e0;
+            background-color: #ffffff; /* White background */
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 25px; /* More rounded corners */
             text-align: left;
             width: 300px;
             min-height: 500px;
             box-sizing: border-box;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #d3d3d3; /* Thin grey border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             overflow: hidden;
             position: relative;
         }
@@ -129,12 +120,13 @@
         .result-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-color: #ffc107; /* Yellow glow on hover */
         }
 
         .result-item img {
             width: 100%;
             height: 50%;
-            border-radius: 10px;
+            border-radius: 20px; /* Adjusted to match the new rounded corners */
             object-fit: cover;
             margin-bottom: 10px;
         }
@@ -180,7 +172,7 @@
             max-width: 600px;
             height: 80%; /* Uniform height for all */
             text-align: center;
-            border-radius: 10px;
+            border-radius: 20px; /* More rounded corners */
             color: #000;
             overflow-y: auto;
         }
@@ -317,15 +309,15 @@
                             const name = agent.name ? agent.name.replace(/'/g, "\\'") : '';
                             const agency = agent.agency ? agent.agency.replace(/'/g, "\\'") : '';
                             const email = agent.email ? agent.email.replace(/'/g, "\\'") : '';
-                            const aboutMe = agent.aboutMe ? agent.aboutMe.replace(/'/g, "\\'").replace(/\n/g, '<br>') : ''; // Handle line breaks
+                            const aboutMe = agent.aboutMe ? encodeURIComponent(agent.aboutMe.replace(/'/g, "\\'").replace(/\n/g, '<br>')) : '';
                             const sweetSpot = agent.sweetSpot ? agent.sweetSpot.replace(/'/g, "\\'") : '';
                             return `
-                                <div class="result-item" onclick="openAgentModal('${agent.photo}', '${name}', '${agency}', '${email}', '${aboutMe}', '${sweetSpot}')">
+                                <div class="result-item" onclick="openAgentModal('${agent.photo}', '${name}', '${agency}', '${email}', decodeURIComponent('${aboutMe}'), '${sweetSpot}')">
                                     <img src="${agent.photo}" alt="${agent.name}">
                                     <p><strong>Name:</strong> ${agent.name}</p>
                                     <p><strong>Agency:</strong> ${agent.agency}</p>
                                     <p><strong>Email:</strong> ${agent.email}</p>
-                                    <p class="about-me"><strong>About Me:</strong> ${agent.aboutMe}</p>
+                                    <p class="about-me"><strong>About Me:</strong> ${agent.aboutMe.replace(/\n/g, '<br>')}</p>
                                     <p><strong>Sweet Spot:</strong> ${agent.sweetSpot}</p>
                                 </div>
                             `;
@@ -341,7 +333,7 @@
             document.getElementById('modalName').innerHTML = `<strong>Name:</strong> ${name}`;
             document.getElementById('modalAgency').innerHTML = `<strong>Agency:</strong> ${agency}`;
             document.getElementById('modalEmail').innerHTML = `<strong>Email:</strong> ${email}`;
-            document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe.replace(/\n/g, '<br>')}`; // Handle line breaks
+            document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe}`;
             document.getElementById('modalSweetSpot').innerHTML = `<strong>Sweet Spot:</strong> ${sweetSpot}`;
 
             document.getElementById('messageBtn').setAttribute('onclick', `sendMessage('${email}')`);
@@ -376,4 +368,3 @@
     </script>
 </body>
 </html>
-
