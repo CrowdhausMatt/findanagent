@@ -6,254 +6,289 @@
     <title>Estate Directory</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #fdfbfb;
-            color: #000;
-            font-family: 'Prompt', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+    body {
+        background-color: #fdfbfb;
+        color: #000;
+        font-family: 'Prompt', sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-        .container {
-            width: 66%;
-            padding: 40px;
-            border-radius: 10px;
-            background-color: #2E2E2E;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+    .container {
+        width: 66%;
+        padding: 40px;
+        border-radius: 10px;
+        background-color: #2E2E2E;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
+    .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
 
+    .logo img {
+        width: 150px;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 9rem;
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.1;
+        color: #fdfbfb;
+    }
+
+    p {
+        font-size: 2rem;
+        margin: 20px 0;
+        color: #fdfbfb;
+    }
+
+    .search-bar {
+        margin: 20px 0;
+    }
+
+    .search-bar input {
+        padding: 15px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .search-bar button {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        border: none;
+        background-color: #ffc107;
+        color: #333;
+        cursor: pointer;
+    }
+
+    .register-link {
+        margin-top: 10px;
+    }
+
+    .register-link a {
+        color: #fdfbfb;
+        font-size: 0.8rem;
+        text-decoration: none;
+    }
+
+    .results-container {
+        width: 66%;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .results {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .result-item {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 25px;
+        text-align: left;
+        width: 300px;
+        min-height: 500px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #d3d3d3;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .result-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        border-color: #ffc107;
+    }
+
+    .result-item img {
+        width: 100%;
+        height: 50%;
+        border-radius: 20px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .result-item p {
+        font-size: 1rem;
+        margin: 5px 0;
+        color: #000;
+    }
+
+    .result-item p strong {
+        font-size: 1rem;
+    }
+
+    .about-me {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 7.5rem;
+        white-space: normal;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        height: 80%;
+        text-align: center;
+        border-radius: 20px;
+        color: #000;
+        overflow-y: auto;
+    }
+
+    .modal-content img {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .modal-content p {
+        margin: 10px 0;
+        color: #000;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .agent-details {
+        font-size: 0.9rem;
+        transition: font-size 0.3s ease;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    #noResultsModal .no-results-modal-content p {
+        color: #000000 !important;
+        font-size: 0.75rem !important;
+        line-height: 1.5 !important;
+    }
+
+    #noResultsModal .no-results-modal-content {
+        background-color: #ffffff;
+        margin: 20% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        max-width: 400px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .message-btn {
+        background-color: #FFC109;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+
+    @media only screen and (max-width: 600px) {
         .logo img {
-            width: 150px;
+            width: 40px;
             height: auto;
         }
 
         h1 {
-            font-size: 9rem;
-            font-weight: 800;
-            margin: 0;
-            line-height: 1.1;
-            color: #fdfbfb;
+            font-size: 5rem;
         }
+    }
 
-        p {
-            font-size: 2rem;
-            margin: 20px 0;
-            color: #fdfbfb;
+    /* Carousel Styles */
+    .carousel-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        background-color: #fdfbfb;
+    }
+
+    .carousel-row {
+        display: flex;
+        align-items: center;
+        animation: scroll 30s linear infinite;
+    }
+
+    .carousel-row.reverse {
+        animation-direction: reverse;
+    }
+
+    .carousel-item {
+        display: flex;
+        align-items: center;
+        margin: 0 10px; /* Increased margin for even spacing */
+    }
+
+    .carousel-item img {
+        border-radius: 20px;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    @keyframes scroll {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .carousel-item img {
+            width: 80px;
+            height: 80px;
         }
-
-        .search-bar {
-            margin: 20px 0;
-        }
-
-        .search-bar input {
-            padding: 15px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .search-bar button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            border: none;
-            background-color: #ffc107;
-            color: #333;
-            cursor: pointer;
-        }
-
-        .register-link {
-            margin-top: 10px;
-        }
-
-        .register-link a {
-            color: #fdfbfb;
-            font-size: 0.8rem;
-            text-decoration: none;
-        }
-
-        .results-container {
-            width: 66%;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .results {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .result-item {
-            background-color: #ffffff; /* White background */
-            padding: 20px;
-            border-radius: 25px; /* More rounded corners */
-            text-align: left;
-            width: 300px;
-            min-height: 500px;
-            box-sizing: border-box;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #d3d3d3; /* Thin grey border */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .result-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            border-color: #ffc107; /* Yellow glow on hover */
-        }
-
-        .result-item img {
-            width: 100%;
-            height: 50%;
-            border-radius: 20px; /* Adjusted to match the new rounded corners */
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .result-item p {
-            font-size: 1rem;
-            margin: 5px 0;
-            color: #000;
-        }
-
-        .result-item p strong {
-            font-size: 1rem;
-        }
-
-        .about-me {
-            display: -webkit-box;
-            -webkit-line-clamp: 5; /* Limit to 5 lines */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis; /* Add ellipsis (...) */
-            height: 7.5rem; /* Adjust to fit 5 lines */
-            white-space: normal; /* Ensure the text wraps properly */
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            height: 80%; /* Uniform height for all */
-            text-align: center;
-            border-radius: 20px; /* More rounded corners */
-            color: #000;
-            overflow-y: auto;
-        }
-
-        .modal-content img {
-            width: 100%;
-            height: 450px; /* Increased height for larger images */
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .modal-content p {
-            margin: 10px 0;
-            color: #000; /* Ensure text color is black */
-            font-size: 0.9rem; /* Slightly smaller text */
-            line-height: 1.4; /* Improved line spacing */
-        }
-
-        .close-btn {
-            background-color: #FFC109;
-            color: rgb(11, 11, 11);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .agent-details {
-            font-size: 0.9rem; /* Adjusted font size */
-            transition: font-size 0.3s ease;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        #noResultsModal .no-results-modal-content p {
-            color: #000000 !important; /* Force black text */
-            font-size: 0.75rem !important;  /* Reduced font size by 25% */
-            line-height: 1.5 !important; /* Line spacing */
-        }
-
-        #noResultsModal .no-results-modal-content {
-            background-color: #ffffff; /* White background */
-            margin: 20% auto; /* Centered with more top margin */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 60%; /* Smaller width */
-            max-width: 400px; /* Adjust as needed */
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .message-btn {
-            background-color: #FFC109;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 1rem;
-        }
-
-        /* Media query for mobile devices */
-        @media only screen and (max-width: 600px) {
-            .logo img {
-                width: 40px; /* Adjust this value to make the logo smaller */
-                height: auto;
-            }
-
-            h1 {
-                font-size: 5rem; /* Adjust the size of "WHO'S THERE?" text if needed */
-            }
-        }
+    }
     </style>
 </head>
 <body>
     <div class="logo">
         <img src="logo.png" alt="KnokKnok Logo" />
     </div>
+
     <div class="container">
         <h1>WHO'S THERE?</h1>
         <p>Find A Top Class Estate Agent In Your Area</p>
@@ -265,14 +300,26 @@
             <a href="https://airtable.com/appTke8M57IxqdO2N/pagqWWTIzMWlTi3JV/form" target="_blank">Are you an Agent? Register here</a>
         </div>
     </div>
+
+    <!-- First Carousel Section -->
+    <div class="carousel-container">
+        <div class="carousel-row" id="carouselRow1"></div>
+    </div>
+
+    <!-- Space between the two carousels -->
+    <div style="height: 20px;"></div>
+
+    <!-- Second Carousel Section -->
+    <div class="carousel-container">
+        <div class="carousel-row reverse" id="carouselRow2"></div>
+    </div>
+
     <div class="results-container">
         <div class="results" id="results"></div>
     </div>
 
-    <!-- The Agent Modal -->
     <div id="agentModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">Close</span>
+        <div class="modal-content" onclick="event.stopPropagation();">
             <img id="modalImg" src="" alt="Agent Image">
             <div id="agentDetails" class="agent-details">
                 <p id="modalName"></p>
@@ -285,7 +332,6 @@
         </div>
     </div>
 
-    <!-- The No Results Modal -->
     <div id="noResultsModal" class="modal">
         <div class="no-results-modal-content">
             <p>Unfortunately, there are no agents registered in your area (please make sure you have typed a location and not a postcode).</p>
@@ -294,77 +340,124 @@
     </div>
 
     <script>
-        function searchAgents() {
-            const location = document.getElementById('location').value;
-            console.log('Searching for location:', location); // Debugging
-            fetch(`/search?location=${encodeURIComponent(location)}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Fetched data:', data); // Debugging
-                    const resultsDiv = document.getElementById('results');
-                    if (data.length === 0) {
-                        openNoResultsModal();
-                    } else {
-                        resultsDiv.innerHTML = data.map(agent => {
-                            const name = agent.name ? agent.name.replace(/'/g, "\\'") : '';
-                            const agency = agent.agency ? agent.agency.replace(/'/g, "\\'") : '';
-                            const email = agent.email ? agent.email.replace(/'/g, "\\'") : '';
-                            const aboutMe = agent.aboutMe ? encodeURIComponent(agent.aboutMe.replace(/'/g, "\\'").replace(/\n/g, '<br>')) : '';
-                            const sweetSpot = agent.sweetSpot ? agent.sweetSpot.replace(/'/g, "\\'") : '';
-                            return `
-                                <div class="result-item" onclick="openAgentModal('${agent.photo}', '${name}', '${agency}', '${email}', decodeURIComponent('${aboutMe}'), '${sweetSpot}')">
-                                    <img src="${agent.photo}" alt="${agent.name}">
-                                    <p><strong>Name:</strong> ${agent.name}</p>
-                                    <p><strong>Agency:</strong> ${agent.agency}</p>
-                                    <p><strong>Email:</strong> ${agent.email}</p>
-                                    <p class="about-me"><strong>About Me:</strong> ${agent.aboutMe.replace(/\n/g, '<br>')}</p>
-                                    <p><strong>Sweet Spot:</strong> ${agent.sweetSpot}</p>
-                                </div>
-                            `;
-                        }).join('');
-                    }
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
-
-        function openAgentModal(photo, name, agency, email, aboutMe, sweetSpot) {
-            console.log(`Opening modal for: ${name}`); // Debugging
-            document.getElementById('modalImg').src = photo;
-            document.getElementById('modalName').innerHTML = `<strong>Name:</strong> ${name}`;
-            document.getElementById('modalAgency').innerHTML = `<strong>Agency:</strong> ${agency}`;
-            document.getElementById('modalEmail').innerHTML = `<strong>Email:</strong> ${email}`;
-            document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe}`;
-            document.getElementById('modalSweetSpot').innerHTML = `<strong>Sweet Spot:</strong> ${sweetSpot}`;
-
-            document.getElementById('messageBtn').setAttribute('onclick', `sendMessage('${email}')`);
-
-            const modalContent = document.querySelector('.modal-content');
-            const agentDetails = document.getElementById('agentDetails');
-
-            // Reset font size
-            agentDetails.style.fontSize = '0.9rem';
-
-            // Adjust font size if content overflows
-            while (modalContent.scrollHeight > modalContent.clientHeight) {
-                const currentFontSize = parseFloat(window.getComputedStyle(agentDetails).fontSize);
-                agentDetails.style.fontSize = `${currentFontSize - 0.1}rem`;
+function searchAgents() {
+    const location = document.getElementById('location').value;
+    fetch(`/search?location=${encodeURIComponent(location)}`)
+        .then(response => response.json())
+        .then(data => {
+            const resultsDiv = document.getElementById('results');
+            if (data.length === 0) {
+                openNoResultsModal();  // Show the modal if no results are found
+            } else {
+                resultsDiv.innerHTML = data.map(agent => {
+                    const formattedAboutMe = (agent.aboutMe || '').replace(/\n/g, '<br>');
+                    return `
+                        <div class="result-item" 
+                             data-photo="${encodeURIComponent(agent.photo || '')}" 
+                             data-name="${encodeURIComponent(agent.name || '')}" 
+                             data-agency="${encodeURIComponent(agent.agency || '')}" 
+                             data-email="${encodeURIComponent(agent.email || '')}" 
+                             data-aboutme="${encodeURIComponent(formattedAboutMe)}" 
+                             data-sweetspot="${encodeURIComponent(agent.sweetSpot || '')}" 
+                             onclick="openAgentModal(this)">
+                            <img src="${agent.photo}" alt="${agent.name}">
+                            <p><strong>Name:</strong> ${agent.name}</p>
+                            <p><strong>Agency:</strong> ${agent.agency}</p>
+                            <p><strong>Email:</strong> ${agent.email}</p>
+                            <p class="about-me"><strong>About Me:</strong> ${formattedAboutMe}</p>
+                            <p><strong>Sweet Spot:</strong> ${agent.sweetSpot}</p>
+                        </div>
+                    `;
+                }).join('');
             }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            openNoResultsModal();  // Open the modal if there's an error with the fetch
+        });
+}
 
-            document.getElementById('agentModal').style.display = 'block';
-        }
+function openAgentModal(element) {
+    const photo = decodeURIComponent(element.getAttribute('data-photo'));
+    const name = decodeURIComponent(element.getAttribute('data-name'));
+    const agency = decodeURIComponent(element.getAttribute('data-agency'));
+    const email = decodeURIComponent(element.getAttribute('data-email'));
+    const aboutMe = decodeURIComponent(element.getAttribute('data-aboutme'));
+    const sweetSpot = decodeURIComponent(element.getAttribute('data-sweetspot'));
 
-        function sendMessage(email) {
-            window.location.href = `mailto:${email}`;
-        }
+    document.getElementById('modalImg').src = photo;
+    document.getElementById('modalName').innerHTML = `<strong>Name:</strong> ${name}`;
+    document.getElementById('modalAgency').innerHTML = `<strong>Agency:</strong> ${agency}`;
+    document.getElementById('modalEmail').innerHTML = `<strong>Email:</strong> ${email}`;
+    document.getElementById('modalAboutMe').innerHTML = `<strong>About Me:</strong> ${aboutMe}`;
+    document.getElementById('modalSweetSpot').innerHTML = `<strong>Sweet Spot:</strong> ${sweetSpot}`;
 
-        function openNoResultsModal() {
-            document.getElementById('noResultsModal').style.display = 'block';
-        }
+    document.getElementById('messageBtn').setAttribute('onclick', `sendMessage('${email}')`);
 
-        function closeModal() {
-            document.getElementById('agentModal').style.display = 'none';
-            document.getElementById('noResultsModal').style.display = 'none';
-        }
+    document.getElementById('agentModal').style.display = 'block';
+}
+
+function sendMessage(email) {
+    // Trigger the email client
+    window.location.href = `mailto:${email}`;
+}
+
+function openNoResultsModal() {
+    document.getElementById('noResultsModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('agentModal').style.display = 'none';
+    document.getElementById('noResultsModal').style.display = 'none';
+}
+
+
+// Close the modal when clicking outside of it
+document.getElementById('agentModal').addEventListener('click', closeModal);
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/carousel-agents')
+        .then(response => response.json())
+        .then(data => {
+            const carouselRow1 = document.getElementById('carouselRow1');
+            const carouselRow2 = document.getElementById('carouselRow2');
+
+            const reversedData = [...data].reverse();
+
+            // Populate the first carousel
+            data.forEach(agent => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `<img src="${agent.photo}" alt="Agent Image">`;
+                carouselRow1.appendChild(item);
+            });
+
+            // Duplicate items for infinite scrolling on the first carousel
+            data.forEach(agent => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `<img src="${agent.photo}" alt="Agent Image">`;
+                carouselRow1.appendChild(item);
+            });
+
+            // Populate the second carousel in reverse order
+            reversedData.forEach(agent => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `<img src="${agent.photo}" alt="Agent Image">`;
+                carouselRow2.appendChild(item);
+            });
+
+            // Duplicate items for infinite scrolling on the second carousel
+            reversedData.forEach(agent => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `<img src="${agent.photo}" alt="Agent Image">`;
+                carouselRow2.appendChild(item);
+            });
+        })
+        .catch(error => console.error('Error fetching carousel data:', error));
+});
     </script>
 </body>
 </html>
