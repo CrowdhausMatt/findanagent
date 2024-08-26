@@ -18,21 +18,31 @@ app.use(express.static(path.join(__dirname)));
 
 // Fetch data from Airtable
 async function fetchAgents() {
+    let allRecords = [];
+    let offset;
+
     try {
-        const response = await axios.get(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`, {
-            headers: { Authorization: `Bearer ${AIRTABLE_API_KEY}` }
-        });
-        console.log(response.data.records); // Log the fetched data records to see field names
-        return response.data.records.map(record => {
-            console.log(record.fields); // Log the fields of each record to see the exact field names
+        do {
+            const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}?${offset ? `offset=${offset}` : ''}`;
+            const response = await axios.get(url, {
+                headers: { Authorization: `Bearer ${AIRTABLE_API_KEY}` }
+            });
+
+            allRecords = allRecords.concat(response.data.records);
+            offset = response.data.offset; // If there are more pages, Airtable provides an offset for the next request.
+        } while (offset);
+
+        console.log('All fetched records:', allRecords); // Log all records to verify what was fetched
+
+        return allRecords.map(record => {
             return {
                 name: record.fields.Name,
                 email: record.fields.Email,
                 location: record.fields.Location,
                 photo: record.fields.Photo ? record.fields.Photo[0].url : '',
-                aboutMe: record.fields['About Me'], // Ensure this matches exactly with Airtable field name
+                aboutMe: record.fields['About Me'],
                 sweetSpot: record.fields.SweetSpot,
-                agency: record.fields.Agency // Ensure this matches exactly with Airtable field name
+                agency: record.fields.Agency
             };
         });
     } catch (error) {
@@ -43,7 +53,6 @@ async function fetchAgents() {
 
 // Endpoint to search for agents by location
 app.get('/search', async (req, res) => {
-    console.log('Received search request');
     const { location } = req.query;
     const agents = await fetchAgents();
     const results = agents.filter(agent => {
@@ -54,6 +63,12 @@ app.get('/search', async (req, res) => {
         return false;
     });
     res.json(results);
+});
+
+// New endpoint to fetch all agents for the carousel
+app.get('/carousel-agents', async (req, res) => {
+    const agents = await fetchAgents(); // Fetch all agents without filtering
+    res.json(agents);
 });
 
 app.listen(PORT, () => {
